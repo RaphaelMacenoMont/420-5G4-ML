@@ -1,7 +1,8 @@
 # AGENTS.md — agent/
 
-Standalone C++17/CMake console app. The rest of the repo (`apprentissage/`,
-`analyseimage/`) is separate Python/ML coursework — only touch `agent/` unless asked.
+C++17/CMake console app plus a Python/customtkinter UI in `ui/`. The rest of the
+repo (`apprentissage/`, `analyseimage/`) is separate Python/ML coursework — only
+touch `agent/` unless asked.
 
 ## Build & run
 
@@ -38,6 +39,23 @@ cmake --build build -j
 - `users.txt`: `name|userId|isbn1,isbn2,...`.
 - Keep them consistent: a checked-out book's `borrowerId` must match a user
   whose borrowed list contains that ISBN.
+
+## Python UI (`ui/`)
+
+Minimal customtkinter window. `customtkinter` is not installed system-wide; use
+the project venv.
+
+```bash
+cd agent/ui
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+python app.py
+```
+
+- Entry point `app.py`, window class in `main_window.py`.
+- Needs X11 (`DISPLAY` + mounted X socket, provided by the devcontainer).
+- Headless-safe smoke test: `MainWindow()`, `app.after(500, app.destroy)`, `app.mainloop()`.
 
 ## Gotchas
 
